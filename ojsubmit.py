@@ -10,14 +10,19 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from halo import Halo
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument('--headless')
-chrome_options.add_argument('--no-sandbox')
+try:
+    firefox_options = webdriver.FirefoxOptions()
+    firefox_options.add_argument('--headless')
+    firefox_options.add_argument('--no-sandbox')
+    driver = webdriver.Firefox()
+    #gecko driver for firefox
+except:
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--no-sandbox')
+    driver = webdriver.Chrome()
 
 url="http://oj.iiit.ac.in/public/login.php"
-
-driver = webdriver.Chrome(chrome_options=chrome_options,service_args=['--verbose'])
-#driver=webdriver.Chrome()
 
 print("Trying to reach OJ...")
 
